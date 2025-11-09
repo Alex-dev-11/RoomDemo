@@ -1,11 +1,14 @@
+package com.example.roomdemo
+
 import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 
-class MainViewModel (application: Application): ViewModel {
+class MainViewModel (application: Application): ViewModel() {
     val allProducts: LiveData<List<Product>>
     private val repository: ProductRepository
-    val searchResult: MutableLiveData<List<Product>>
+    val searchResults: MutableLiveData<List<Product>>
 
     init {
         val productDb = ProductRoomDatabase.getInstance(application)
@@ -13,7 +16,7 @@ class MainViewModel (application: Application): ViewModel {
         repository = ProductRepository(productDao)
 
         allProducts = repository.allProducts
-        searchResult = repository.searchResult
+        searchResults = repository.searchResults
     }
 
     fun insertProduct(product: Product) {

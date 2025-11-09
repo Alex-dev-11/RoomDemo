@@ -1,12 +1,12 @@
 package com.example.roomdemo
 
-import MainViewModel
 import android.app.Application
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -23,7 +23,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.ViewModel
@@ -35,6 +34,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
+import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
 import androidx.lifecycle.viewmodel.compose.viewModel
 
@@ -49,7 +49,7 @@ class MainActivity : ComponentActivity() {
                     owner?.let {
                         val viewModel: MainViewModel = viewModel(
                             it,
-                            "MainViewModel",
+                            "com.example.roomdemo.MainViewModel",
                             MainViewModelFactory(
                                 LocalContext.current.applicationContext
                                         as Application)
@@ -104,7 +104,7 @@ fun MainScreen(
             .fillMaxWidth()
     ) {
         CustomTextField(
-            title = "Product Name",
+            title = "com.example.roomdemo.Product Name",
             textState = productName,
             onTextChange = onProductTextChange,
             keyboardType = KeyboardType.Text
@@ -169,7 +169,7 @@ fun MainScreen(
         val list = if (searching) searchResults else allProducts
 
         item {
-            TitleRow(head1 = "ID", head2 = "Product", head3 = "Quantity")
+            TitleRow(head1 = "ID", head2 = "com.example.roomdemo.Product", head3 = "Quantity")
         }
 
         items(list) { product ->

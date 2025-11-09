@@ -1,8 +1,16 @@
-import androidx.lifecycle.MutableLiveData
+package com.example.roomdemo
 
-class ProductRepository (private val productDao: productDao) {
-    val searchResult = MutableLiveData<List<Product>>()
-    val allProducts: LivaData<List<Product>> = productDao.getAllProducts()
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
+
+class ProductRepository (private val productDao: ProductDao) {
+    val searchResults = MutableLiveData<List<Product>>()
+    val allProducts: LiveData<List<Product>> = productDao.getAllProducts()
     private val coroutineScope = CoroutineScope(Dispatchers.Main)
     fun insertProduct(newproduct: Product) {
         coroutineScope.launch(Dispatchers.IO) {
